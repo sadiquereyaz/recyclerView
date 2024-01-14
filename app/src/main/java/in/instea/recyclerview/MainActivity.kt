@@ -4,18 +4,19 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView.VERTICAL
 
 class MainActivity : AppCompatActivity() {
 
-    lateinit var recyclerView: RecyclerView
+    private lateinit var myRecyclerView: RecyclerView
 
-    lateinit var newsContentArray: ArrayList<NewsContent>
+    private lateinit var newsContentArray: ArrayList<NewsContent>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        recyclerView = findViewById<RecyclerView>(R.id.rV)
+        myRecyclerView = findViewById<RecyclerView>(R.id.rV)
 
         val imageIdArray = intArrayOf(
             R.drawable.pic0, R.drawable.pic1, R.drawable.pic2, R.drawable.pic3
@@ -27,14 +28,14 @@ class MainActivity : AppCompatActivity() {
             "Space Exploration Milestone Achieved as Rover Discovers Signs of Ancient Life on Mars"
         )
 
-        newsContentArray = arrayListOf<NewsContent>()
+//        newsContentArray = arrayListOf<NewsContent>()
         for (index in imageIdArray.indices) {
             val oneNews = NewsContent(imageIdArray[index], newsArray[index])
 
             newsContentArray.add(oneNews)
         }
+        myRecyclerView.layoutManager = LinearLayoutManager(this, VERTICAL, false)
 
-        recyclerView.adapter = MyAdapter(newsContentArray, this)
-        recyclerView.layoutManager = LinearLayoutManager(this)
+        myRecyclerView.adapter = MyAdapter(newsContentArray, this)      //setting adapter to recyclerView
     }
 }

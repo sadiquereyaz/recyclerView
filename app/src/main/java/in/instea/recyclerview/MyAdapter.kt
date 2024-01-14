@@ -7,11 +7,14 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import `in`.instea.recyclerview.NewsContent
-import `in`.instea.recyclerview.R
 
-class MyAdapter(val newsArray: ArrayList<NewsContent>, val contex: Activity) :
+class MyAdapter(private val newsArray: ArrayList<NewsContent>, val contex: Activity) :
     RecyclerView.Adapter<MyAdapter.MyViewHolder>() {
+
+    class MyViewHolder(private val itemView: View) : RecyclerView.ViewHolder(itemView) {
+        val newsS: TextView = itemView.findViewById<TextView>(R.id.newsTV)
+        val newsI: ImageView = itemView.findViewById<ImageView>(R.id.newsIV)
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyAdapter.MyViewHolder {
         val itemView = LayoutInflater.from(parent.context).inflate(R.layout.news_row, parent, false)
@@ -19,8 +22,8 @@ class MyAdapter(val newsArray: ArrayList<NewsContent>, val contex: Activity) :
     }
 
     override fun onBindViewHolder(holder: MyAdapter.MyViewHolder, position: Int) {
-        var currentItem = newsArray[position]
-        holder.newss.text = currentItem.news
+        val currentItem = newsArray[position]
+        holder.newsS.text = currentItem.news
         holder.newsI.setImageResource(currentItem.imageId)
     }
 
@@ -28,8 +31,4 @@ class MyAdapter(val newsArray: ArrayList<NewsContent>, val contex: Activity) :
         return newsArray.size
     }
 
-    class MyViewHolder(val itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val newss = itemView.findViewById<TextView>(R.id.newsTV)
-        val newsI = itemView.findViewById<ImageView>(R.id.newsIV)
-    }
 }
