@@ -35,7 +35,7 @@ class MainActivity : AppCompatActivity() {
             newsContentArray.add(oneNews)
         }
         myRecyclerView.layoutManager = LinearLayoutManager(this, VERTICAL, false)
-
+//since data may present in arraylist but recyclerView only takes data is a particular format, so RecyclerView Adapter helps data to adapt in recyclerView
         myRecyclerView.adapter = MyAdapter(newsContentArray, this)      //setting adapter to recyclerView
     }
 }
